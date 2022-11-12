@@ -7,7 +7,7 @@ from convert import str_to_int_real, str_to_complex
 from exception import exception_number
 from menu import menu1, menu2_complex, menu2_int, menu2_real
 
-ONE, TWO, THREE, FOUR, FIVE , SIX, SEVEN, EIGHT, NINE, TEN = range(10)
+ONE, TWO, THREE, FOUR, FIVE , SIX, SEVEN, EIGHT, NINE = range(9)
 operand = ''
 str_num_1 = ''
 str_num_2 = ''
@@ -22,8 +22,6 @@ op_fun = {'mult':mult, 'div':div, 'sum':sum, 'difference':dif, 'pov':exponentiat
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-
 
 
 def start(update, _):
@@ -163,7 +161,6 @@ def one_dig(update, _):
     return FIVE
 
 
-
 def digit_2_complex(update, _):
     global operand 
     global str_num_1
@@ -219,11 +216,6 @@ def digit_1_complex(update, _):
     return SIX
 
 
-
-
-
-
-
 def two_dig_complex(update, _):
     query = update.callback_query
     query.answer()
@@ -241,15 +233,6 @@ def one_dig_complex(update, _):
     query.edit_message_text(text=f"Выбранный операнд: {op_str[operand]}, Введите действительную "
                             " и мнимую части комплексного числа через пробел: ")
     return EIGHT
-
-
-
-
-
-
-
-
-
 
 
 def help_command(update, _):
@@ -322,17 +305,10 @@ if __name__ == '__main__':
             NINE:
                   [ # expression
                       MessageHandler(Filters.text & ~Filters.command,expression2) 
-                  ],
-            TEN:
-                  [
-
-                  ],
-
-
+                  ]
         },
         fallbacks=[CommandHandler('start', start)],
     )
-
     dispatcher.add_handler(conv_handler)
     updater.start_polling()
     updater.idle()
