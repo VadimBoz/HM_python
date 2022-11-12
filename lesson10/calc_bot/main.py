@@ -264,19 +264,11 @@ def help_command(update, _):
                            " Используйте `/start` что бы начать заново.")
     return ONE
 
-def cancel(update, _):
-    user = update.message.from_user
-    logger.info("Пользователь %s отменил игру.", user.first_name)
-    update.message.reply_text(
-        'Мое дело предложить - Ваше отказаться'
-        ' Будет скучно - пиши.', 
-    )
-    return ConversationHandler.END
 
 def end(update, _):
-    query = update.callback_query
-    query.answer()
-    query.edit_message_text(text="See you next time!")
+    user = update.message.from_user
+    logger.info("Пользователь %s завершил разговор", user.first_name)
+    update.message.reply_text(text="See you next time!")
     return ConversationHandler.END
 
 if __name__ == '__main__':
@@ -328,7 +320,7 @@ if __name__ == '__main__':
                       MessageHandler(Filters.text & ~Filters.command,expression2) 
                   ]
         },
-        fallbacks=[CommandHandler('start', start)],
+        fallbacks=[CommandHandler('start', start), CommandHandler('end', end)],
     )
     dispatcher.add_handler(conv_handler)
     updater.start_polling()
