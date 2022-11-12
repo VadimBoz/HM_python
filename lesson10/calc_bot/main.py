@@ -81,7 +81,11 @@ def expression2(update, _):
         return NINE
     logger.info("Пользователь %s ввел: %s", user.first_name, str_num_1)
     try:
-        res= eval(str_num_1)
+        res= eval(str_num)
+    except ZeroDivisionError:
+        update.message.reply_text(text=f"ZeroDivisionError, введите математическое выражение: или начните сначала /start ")
+        logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_1)
+        return NINE
     except Exception:
         update.message.reply_text(text=f"Нераспознано выражение, введите математическое выражение: или начните сначала /start ")
         logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_1)
@@ -116,9 +120,17 @@ def digit_2(update, _):
         else:
             update.message.reply_text(text=f'Введено неверное значение, посторите ввод.')
             return FOUR
-
         logger.info("Пользователь %s ввел: %s", user.first_name, str_num_1)
-        res = f"{str_num_1} {op_str[operand]} {str_num_2} = {op_fun[operand](str_num_1,str_num_2)} "
+        try:
+            res = f"{str_num_1} {op_str[operand]} {str_num_2} = {op_fun[operand](str_num_1,str_num_2)} "
+        except ZeroDivisionError:
+            update.message.reply_text(text=f"ZeroDivisionError, введите снова: или начните сначала /start ")
+            logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_1)
+            return FOUR
+        except Exception:
+            update.message.reply_text(text=f"Нераспознано выражение, введите снова: или начните сначала /start ")
+            logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_1)
+            return FOUR
         update.message.reply_text(res)
         logger.info("Пользователь %s получил решение : %s", user.first_name, res)
     str_num_1=''
@@ -186,7 +198,16 @@ def digit_2_complex(update, _):
         else:
             update.message.reply_text(text=f'Введено неверное значение, посторите ввод.')
             return SEVEN
-
+        try:
+             res = f"{str_num_1} {op_str[operand]} {str_num_2} = {op_fun[operand](str_num_1,str_num_2)} "
+        except ZeroDivisionError:     
+                update.message.reply_text(text=f"ZeroDivisionError, введите снова: или начните сначала /start ")
+                logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_1)
+                return SEVEN
+        except Exception:
+            update.message.reply_text(text=f"Нераспознано выражение, введите снова: или начните сначала /start ")
+            logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_1)
+            return SEVEN
         logger.info("Пользователь %s ввел: %s", user.first_name, str_num_1)
         res = f"{str_num_1} {op_str[operand]} {str_num_2} = {op_fun[operand](str_num_1,str_num_2)} "
         update.message.reply_text(res)
