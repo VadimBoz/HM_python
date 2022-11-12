@@ -125,11 +125,11 @@ def digit_2(update, _):
             res = f"{str_num_1} {op_str[operand]} {str_num_2} = {op_fun[operand](str_num_1,str_num_2)} "
         except ZeroDivisionError:
             update.message.reply_text(text=f"ZeroDivisionError, введите снова: или начните сначала /start ")
-            logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_1)
+            logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_2)
             return FOUR
         except Exception:
             update.message.reply_text(text=f"Нераспознано выражение, введите снова: или начните сначала /start ")
-            logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_1)
+            logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_2)
             return FOUR
         update.message.reply_text(res)
         logger.info("Пользователь %s получил решение : %s", user.first_name, res)
@@ -202,11 +202,11 @@ def digit_2_complex(update, _):
              res = f"{str_num_1} {op_str[operand]} {str_num_2} = {op_fun[operand](str_num_1,str_num_2)} "
         except ZeroDivisionError:     
                 update.message.reply_text(text=f"ZeroDivisionError, введите снова: или начните сначала /start ")
-                logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_1)
+                logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_2)
                 return SEVEN
         except Exception:
             update.message.reply_text(text=f"Нераспознано выражение, введите снова: или начните сначала /start ")
-            logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_1)
+            logger.info("Пользователь %s ввел ошибочное выражение : %s", user.first_name, str_num_2)
             return SEVEN
         logger.info("Пользователь %s ввел: %s", user.first_name, str_num_1)
         res = f"{str_num_1} {op_str[operand]} {str_num_2} = {op_fun[operand](str_num_1,str_num_2)} "
