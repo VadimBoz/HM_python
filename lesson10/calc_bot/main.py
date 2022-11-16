@@ -261,7 +261,8 @@ def help_command(update, _):
     query.answer()
     variant = query.data
     query.edit_message_text(text=f"Выбранный вариант: {variant} \n"
-                           " Используйте `/start` что бы начать заново.")
+                           " Используйте `/start` что бы начать заново, \n"
+                            "'/end'  - завершение работы с ботом")
     return ONE
 
 
